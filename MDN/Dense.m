@@ -18,6 +18,14 @@ classdef Dense < handle
             obj.w0 = [];
         end
         
+        function set_input_shape(obj, shape)
+            obj.input_shape = shape;
+        end
+        
+        function Y = output_shape(obj)
+            Y = [obj.n_units];
+        end
+        
         function initialize(obj)
             limit = 1/sqrt(obj.input_shape(1));
             obj.W = (2*limit).*rand(obj.input_shape(1), obj.n_units) - limit;

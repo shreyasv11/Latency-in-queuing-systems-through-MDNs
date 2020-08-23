@@ -26,6 +26,14 @@ classdef MDN_Layer < handle
             obj.num_components = num_components;
         end
         
+        function set_input_shape(obj, shape)
+            obj.input_shape = shape;
+        end
+        
+        function Y = output_shape(obj)
+            Y = [obj.output_dim * 3];
+        end
+        
         function initialize(obj)
             obj.input_dim = obj.input_shape(1);
             obj.output_dim = obj.num_components;
