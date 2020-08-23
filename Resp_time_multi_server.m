@@ -11,17 +11,17 @@ end
 
 eventdep = cellfun(@(c) c.node == 2 && c.event == EventType.DEP, sa.event);
 dtime = cellfun(@(c) (c.t), {sa.event{eventdep}});
-deptime = zeros(1, length(dtime));
 
 arv_ids = sa.arv_job_id;
 dep_ids = sa.dep_job_id;
+arvtime_new = zeros(1, length(dtime));
 
 for i=1:length(dep_ids)
     k = (arv_ids == dep_ids(i));
-    deptime(i) = dtime(k);
+    arvtime_new(i) = arvtime(k);
 end
 
-resptime = deptime - arvtime(1:length(deptime));
+resptime = dtime - arvtime_new;
 m = mean(resptime);
 n = SolverJMT(model).getAvgTable;
 disp(m)
