@@ -16,4 +16,11 @@ while t<endTime
     end
 end
 ti=ti(ti<endTime);
+ti =  [0; diff(ti(:))];
+fileID = fopen('trace.txt', 'a');
+for i=1:(length(ti)-1)
+    fprintf(fileID, '%f \n', ti(i));
+end
+fprintf(fileID, '%f', ti(length(ti)));
+fclose(fileID);
 end
