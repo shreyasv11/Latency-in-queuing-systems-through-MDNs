@@ -20,13 +20,17 @@ classdef Tanh < handle
             Y = obj.input_shape;
         end
         
+        function y = tanh_m(obj, x)
+            y = 2./(1 + exp(-2*x)) - 1;
+        end
+        
         function Y = forward_pass(obj,X)
             obj.layer_input = X;
-            Y = tanh(X);
+            Y = obj.tanh_m(X);
         end
         
         function accum_grad = backward_pass(obj, accum_grad)
-            accum_grad = accum_grad * (1 - (tanh(obj.layer_input)).^2);
+            accum_grad = accum_grad .* (1 - ((obj.tanh_m(obj.layer_input)).^2));
         end
     end
 end
